@@ -1,9 +1,10 @@
+import React from "react";
+import FetchData from "./component/fetchData/index";
 
 function App() {
   return (
     <div className="App">
-     HELLO
-     https://nexogenshares.blob.core.windows.net/recruitment/trucktimeline.json
+      <FetchData />
     </div>
   );
 }
