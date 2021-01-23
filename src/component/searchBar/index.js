@@ -1,14 +1,17 @@
-import React, { useState, useContext, createContext } from "react";
-import { TrucksOrdersContext } from "../listOfData/index";
-import Trucks from "../trucksName/index";
+import React, { useState, createContext, useContext } from "react";
+import { useContextData } from "../listOfData/index";
 import Fuse from "fuse.js";
 
 export const TrucksListContext = createContext();
 
-export default function SearchBar() {
-  const [query, setQuery] = useState("");
-  const list = useContext(TrucksOrdersContext);
+export function useTrucksListContext() {
+  return useContext(TrucksListContext);
+}
 
+export default function SearchBar({ children }) {
+  const [query, setQuery] = useState("");
+  const list = useContextData();
+  console.log(list);
   const trucksProvide = list ? list.trucks : "";
 
   const fuse = new Fuse(trucksProvide, {
@@ -21,19 +24,16 @@ export default function SearchBar() {
       })
     : trucksProvide;
   return (
-    <div>
-      <div>
+    <TrucksListContext.Provider value={finalResult}>
+      <div className="">
+      <h1 className="title">Truck Timeline</h1>
         <input
           type="text"
           value={query}
           onChange={({ target }) => setQuery(target.value)}
         />
       </div>
-      <div>
-        <TrucksListContext.Provider value={finalResult}>
-          <Trucks />
-        </TrucksListContext.Provider>
-      </div>
-    </div>
+      {children}
+    </TrucksListContext.Provider>
   );
 }

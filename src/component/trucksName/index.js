@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
-import { TrucksListContext } from "../searchBar/index";
+import React from "react";
+import { useTrucksListContext } from "../searchBar/index";
+import "./styles/truck.css";
 
 export default function TrucksName() {
-  const trucks = useContext(TrucksListContext);
+  const trucks = useTrucksListContext()
   return (
     <div>
       {trucks

@@ -1,12 +1,13 @@
-import React, { useEffect, useState, createContext } from "react";
-import "./styles/fetchData.css";
+import React, { useEffect, useState, createContext, useContext } from "react";
 import axios from "axios";
-import SearchBar from "../searchBar/index";
 
 export const TrucksOrdersContext = createContext();
 
-export default function ListOfData() {
+export function useContextData() {
+  return useContext(TrucksOrdersContext);
+}
 
+export default function ListOfData({ children }) {
   const url = "/recruitment/trucktimeline.json";
   const [data, setData] = useState();
   useEffect(() => {
@@ -24,11 +25,10 @@ export default function ListOfData() {
     }
     fetchData();
   }, [url]);
+
   return (
-    <div>
-      <TrucksOrdersContext.Provider value={data}>
-        <SearchBar />
-      </TrucksOrdersContext.Provider>
-    </div>
+    <TrucksOrdersContext.Provider value={data}>
+      {children}
+    </TrucksOrdersContext.Provider>
   );
 }
