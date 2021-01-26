@@ -1,5 +1,6 @@
 import React from "react";
 import "./styles/orders.css";
+import { Row, Col, Container } from "react-bootstrap";
 import { useTrucksListContext, useOrdersListContext } from "../searchBar/index";
 
 export default function Orders() {
@@ -28,16 +29,15 @@ export default function Orders() {
   console.log(filteredOrders);
 
   return (
-    <div>
-      <div>
-        {filteredOrders.map((order) => {
-          return (
-            <div>
-              <div key={order.name}></div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
+    <Container>
+      {filteredOrders.map((order) => {
+        return (
+    
+          <Row style={{ width: "41%" }} key={order.name}>
+            <Col key={order.name}></Col>
+          </Row>
+        );
+      })}
+    </Container>
   );
 }

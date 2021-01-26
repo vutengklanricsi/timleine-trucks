@@ -3,6 +3,7 @@ import ListOfData from "./component/listOfData/index";
 import SearchBar from "./component/searchBar/index";
 import TrucksName from "./component/trucksName/index";
 import Orders from "./component/orders/index";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
       <ListOfData>
         <SearchBar>
           <TrucksName />
-          <Orders />  
+          <Orders />
         </SearchBar>
       </ListOfData>
     </div>

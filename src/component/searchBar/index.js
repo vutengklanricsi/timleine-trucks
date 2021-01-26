@@ -1,7 +1,7 @@
 import React, { useState, createContext, useContext } from "react";
 import { useContextData } from "../listOfData/index";
 import Fuse from "fuse.js";
-import { Row, Col, Container } from "react-bootstrap";
+import "./styles/searchBar.css";
 
 export const TrucksListContext = createContext();
 
@@ -43,21 +43,20 @@ export default function SearchBar({ children }) {
   return (
     <TrucksListContext.Provider value={truckData}>
       <OrdersListContext.Provider value={ordersData}>
-        <Container>
-          <Row>
-            <Col>
-              <h1 className="title">Truck Timeline</h1>
-            </Col>
-            <Col>
-              <input
-                type="text"
-                value={query}
-                onChange={({ target }) => setQuery(target.value)}
-              />
-            </Col>
-          </Row>
-        </Container>
-
+        <div className="header-frame">
+          <div className="title">
+            <h1>Truck Timeline</h1>
+          </div>
+          <div className="input-frame">
+            <input
+            className="input-field"
+              type="text"
+              value={query}
+              onChange={({ target }) => setQuery(target.value)}
+              placeholder="Truck name"
+            />
+          </div>
+        </div>
         {children}
       </OrdersListContext.Provider>
     </TrucksListContext.Provider>
