@@ -1,8 +1,7 @@
 import React from "react";
 import ListOfData from "./component/listOfData/index";
 import SearchBar from "./component/searchBar/index";
-import TrucksName from "./component/trucksName/index";
-import Orders from "./component/orders/index";
+import Chart from "./component/chart/index";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
@@ -10,8 +9,7 @@ function App() {
     <div>
       <ListOfData>
         <SearchBar>
-          <TrucksName />
-          <Orders />
+          <Chart />
         </SearchBar>
       </ListOfData>
     </div>
