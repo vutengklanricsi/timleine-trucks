@@ -8,8 +8,9 @@ export function useContextData() {
 }
 
 export default function ListOfData({ children }) {
-  const url = "/recruitment/trucktimeline.json";
   const [data, setData] = useState();
+  const url = "/recruitment/trucktimeline.json";
+
   useEffect(() => {
     async function fetchData() {
       const request = await axios;

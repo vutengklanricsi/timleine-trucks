@@ -2,6 +2,7 @@ import React, { useState, createContext, useContext } from "react";
 import { useContextData } from "../listOfData/index";
 import Fuse from "fuse.js";
 import "./styles/searchBar.css";
+import Input from "../input/index";
 
 export const TrucksListContext = createContext();
 
@@ -18,10 +19,10 @@ export function useOrdersListContext() {
 export default function SearchBar({ children }) {
   const [query, setQuery] = useState("");
   const list = useContextData();
-  const trucksProvide = list ? list.trucks : "";
-  const ordersProvide = list ? list.orders : "";
+  const listOfTrucks = list ? list.trucks : "";
+  const listOfOrders = list ? list.orders : "";
 
-  const fuse = new Fuse(trucksProvide, {
+  const fuse = new Fuse(listOfTrucks, {
     keys: ["name"],
     includeScore: true,
   });
@@ -32,31 +33,18 @@ export default function SearchBar({ children }) {
     ? result.map((data) => {
         return data.item;
       })
-    : trucksProvide;
+    : listOfTrucks;
 
   const ordersData = truckData
-    ? ordersProvide.map((ordersData) => {
+    ? listOfOrders.map((ordersData) => {
         return ordersData;
       })
-    : ordersProvide;
+    : listOfOrders;
 
   return (
     <TrucksListContext.Provider value={truckData}>
       <OrdersListContext.Provider value={ordersData}>
-        <div className="header-frame">
-          <div className="title">
-            <h1>Truck Timeline</h1>
-          </div>
-          <div className="input-frame">
-            <input
-            className="input-field"
-              type="text"
-              value={query}
-              onChange={({ target }) => setQuery(target.value)}
-              placeholder="Truck name"
-            />
-          </div>
-        </div>
+        <Input query={query} setQuery={setQuery} />
         {children}
       </OrdersListContext.Provider>
     </TrucksListContext.Provider>
